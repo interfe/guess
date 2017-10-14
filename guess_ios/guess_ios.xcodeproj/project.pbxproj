@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		29448A101F91EB20004E1D45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29448A0F1F91EB20004E1D45 /* AppDelegate.swift */; };
-		29448A121F91EB20004E1D45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29448A111F91EB20004E1D45 /* ViewController.swift */; };
 		29448A151F91EB20004E1D45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29448A131F91EB20004E1D45 /* Main.storyboard */; };
 		29448A181F91EB20004E1D45 /* guess_ios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29448A161F91EB20004E1D45 /* guess_ios.xcdatamodeld */; };
 		29448A1A1F91EB20004E1D45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29448A191F91EB20004E1D45 /* Assets.xcassets */; };
 		29448A1D1F91EB20004E1D45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29448A1B1F91EB20004E1D45 /* LaunchScreen.storyboard */; };
 		29448A281F91EB20004E1D45 /* guess_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29448A271F91EB20004E1D45 /* guess_iosTests.swift */; };
 		29448A331F91EB20004E1D45 /* guess_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29448A321F91EB20004E1D45 /* guess_iosUITests.swift */; };
+		294D4F581F9209EE00B5BB3A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D4F571F9209EE00B5BB3A /* CollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 /* Begin PBXFileReference section */
 		29448A0C1F91EB20004E1D45 /* guess_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = guess_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29448A0F1F91EB20004E1D45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		29448A111F91EB20004E1D45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		29448A141F91EB20004E1D45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		29448A171F91EB20004E1D45 /* guess_ios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = guess_ios.xcdatamodel; sourceTree = "<group>"; };
 		29448A191F91EB20004E1D45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		29448A2E1F91EB20004E1D45 /* guess_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = guess_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29448A321F91EB20004E1D45 /* guess_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guess_iosUITests.swift; sourceTree = "<group>"; };
 		29448A341F91EB20004E1D45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		294D4F571F9209EE00B5BB3A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +99,8 @@
 		29448A0E1F91EB20004E1D45 /* guess_ios */ = {
 			isa = PBXGroup;
 			children = (
+				294D4F571F9209EE00B5BB3A /* CollectionViewController.swift */,
 				29448A0F1F91EB20004E1D45 /* AppDelegate.swift */,
-				29448A111F91EB20004E1D45 /* ViewController.swift */,
 				29448A131F91EB20004E1D45 /* Main.storyboard */,
 				29448A191F91EB20004E1D45 /* Assets.xcassets */,
 				29448A1B1F91EB20004E1D45 /* LaunchScreen.storyboard */,
@@ -262,8 +262,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				294D4F581F9209EE00B5BB3A /* CollectionViewController.swift in Sources */,
 				29448A181F91EB20004E1D45 /* guess_ios.xcdatamodeld in Sources */,
-				29448A121F91EB20004E1D45 /* ViewController.swift in Sources */,
 				29448A101F91EB20004E1D45 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
