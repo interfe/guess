@@ -11,13 +11,17 @@ import UIKit
 class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
-    let photos = ["やまだ", "No.2","No.3","No.4","No.5"];
+    
+
+    let class_name = ["やまだ", "No.2","No.3","No.4","No.5"];
     //曜日の数
     let row: CGFloat = 5;
     //何軒まであるかの数
     let colum: CGFloat = 5;
     //marginの最小単位
     let margin: CGFloat = 8;
+    
+    var select_name = "やまだ";
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         
         // Tag番号を使ってLabelのインスタンス生成
         let label = testCell.contentView.viewWithTag(2) as! UILabel
-        label.text = photos[(indexPath as NSIndexPath).row]
+        label.text = class_name[(indexPath as NSIndexPath).row]
         
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
@@ -56,6 +60,30 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         // 計算したセルのwidth,heightを返り値にする
         return CGSize(width: cellSize_w, height: cellSize_h)
     }
+    
+    // Cell が選択された場合
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        // [indexPath.row] から画像名を探し、UImage を設定
+        let name = class_name[(indexPath as NSIndexPath).row]
+        if name != nil {
+            // SubViewController へ遷移するために Segue を呼び出す
+            select_name = name;
+            performSegue(withIdentifier: "toSubViewController",sender: nil)
+        }
+    }
+    
+    // Segue 準備
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if (segue.identifier == "toSubViewController") {
+            let subVC: SubViewController = (segue.destination as? SubViewController)!
+            // SubViewController のselectedImgに選択された画像を設定する
+            subVC.select_name = select_name;
+        }
+    }
+    
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         //int型に変換

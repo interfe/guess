@@ -15,6 +15,8 @@
 		2937D4D61F9B1AD60085DB15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2937D4D41F9B1AD60085DB15 /* LaunchScreen.storyboard */; };
 		2937D4E11F9B1AD70085DB15 /* guessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937D4E01F9B1AD70085DB15 /* guessTests.swift */; };
 		2937D4EC1F9B1AD70085DB15 /* guessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937D4EB1F9B1AD70085DB15 /* guessUITests.swift */; };
+		2981FB351F9B3FFF00B8D5C5 /* SubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2981FB331F9B3FFF00B8D5C5 /* SubViewController.swift */; };
+		2981FB361F9B3FFF00B8D5C5 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2981FB341F9B3FFF00B8D5C5 /* SubViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		2937D4E71F9B1AD70085DB15 /* guessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = guessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2937D4EB1F9B1AD70085DB15 /* guessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guessUITests.swift; sourceTree = "<group>"; };
 		2937D4ED1F9B1AD70085DB15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2981FB331F9B3FFF00B8D5C5 /* SubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubViewController.swift; sourceTree = "<group>"; };
+		2981FB341F9B3FFF00B8D5C5 /* SubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				2937D4D41F9B1AD60085DB15 /* LaunchScreen.storyboard */,
 				2937D4D71F9B1AD60085DB15 /* Info.plist */,
 				2937D4CF1F9B1AD60085DB15 /* guess.xcdatamodeld */,
+				2981FB331F9B3FFF00B8D5C5 /* SubViewController.swift */,
+				2981FB341F9B3FFF00B8D5C5 /* SubViewController.xib */,
 			);
 			path = guess;
 			sourceTree = "<group>";
@@ -238,6 +244,7 @@
 				2937D4D61F9B1AD60085DB15 /* LaunchScreen.storyboard in Resources */,
 				2937D4D31F9B1AD60085DB15 /* Assets.xcassets in Resources */,
 				2937D4CE1F9B1AD60085DB15 /* Main.storyboard in Resources */,
+				2981FB361F9B3FFF00B8D5C5 /* SubViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +272,7 @@
 				2937D4D11F9B1AD60085DB15 /* guess.xcdatamodeld in Sources */,
 				2937D4CB1F9B1AD60085DB15 /* ViewController.swift in Sources */,
 				2937D4C91F9B1AD60085DB15 /* AppDelegate.swift in Sources */,
+				2981FB351F9B3FFF00B8D5C5 /* SubViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
