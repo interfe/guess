@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController ,UICollectionViewDataSource,
-UICollectionViewDelegate {
+UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
-    let photos = ["No.1", "No.2","No.3","No.4","No.5","No.6", "No.7","No.8","No.9","No.10",]
+    let photos = ["やまだ", "No.2","No.3","No.4","No.5"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,19 +33,34 @@ UICollectionViewDelegate {
         
         
         return testCell
-        
     }
+    
+    // Screenサイズに応じたセルサイズを返す
+    // UICollectionViewDelegateFlowLayoutの設定が必要
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // 横に２つのCellを入れることを想定して、多少のマージンを入れる
+        let cellSize_w:CGFloat = (self.view.frame.size.width)/5-15
+        let cellSize_h:CGFloat = (self.view.frame.size.height-(96+24))/5-15
+        // 正方形で返すためにwidth,heightを同じにする
+        return CGSize(width: cellSize_w, height: cellSize_h)
+    }
+    
+    
+    
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // section数は１つ
-        return 1
+        return 5;
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         // 要素数を入れる、要素以上の数字を入れると表示でエラーとなる
-        return 10;
+        return 5;
         
     }
     
