@@ -11,7 +11,13 @@ import UIKit
 class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
-    let photos = ["やまだ", "No.2","No.3","No.4","No.5"]
+    let photos = ["やまだ", "No.2","No.3","No.4","No.5"];
+    //曜日の数
+    let row: CGFloat = 5;
+    //何軒まであるかの数
+    let colum: CGFloat = 5;
+    //marginの最小単位
+    let margin: CGFloat = 8;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +35,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let label = testCell.contentView.viewWithTag(2) as! UILabel
         label.text = photos[(indexPath as NSIndexPath).row]
         
+        //セルの背景色
         testCell.backgroundColor = UIColor.cyan
         
         
@@ -41,26 +48,27 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        // 横に２つのCellを入れることを想定して、多少のマージンを入れる
-        let cellSize_w:CGFloat = (self.view.frame.size.width)/5-15
-        let cellSize_h:CGFloat = (self.view.frame.size.height-(96+24))/5-15
-        // 正方形で返すためにwidth,heightを同じにする
+        // 横に5つの、縦に5つのCellを入れることを想定して、多少のマージンを入れる
+        // セルの横のサイズの計算
+        let cellSize_w:CGFloat = (self.view.frame.size.width)/(row)-row*3;
+        //セルの縦のサイズの計算（スクロールさせないためにUICollectionViewの上下のマージン分を除く）
+        let cellSize_h:CGFloat = (self.view.frame.size.height-(margin*12+margin*3))/(colum)-colum*3;
+        // 計算したセルのwidth,heightを返り値にする
         return CGSize(width: cellSize_w, height: cellSize_h)
     }
     
-    
-    
-    
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // section数は１つ
-        return 5;
+        //int型に変換
+        let a:Int = Int(colum)
+        // section数之数
+        return a;
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        //int型に変換
+        let a:Int = Int(row)
         // 要素数を入れる、要素以上の数字を入れると表示でエラーとなる
-        return 5;
+        return a;
         
     }
     
