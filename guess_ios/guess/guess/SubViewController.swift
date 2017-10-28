@@ -24,29 +24,43 @@ class SubViewController: UIViewController {
     
 ///授業の情報を入力する
 @IBAction func class_input(_ sender: UIButton) {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
-        let lesson = Lesson(context:context)
-        
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = delegate.persistentContainer.viewContext
+    
         let lesson_name = class_input.text
         if lesson_name == "" {
             dismiss(animated: true, completion: nil)
             return
         }
 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+    let fetchData = try! context.fetch(fetchRequest)
+    let lesson = Lesson(context:context)
+//    for i in 0..<fetchData.count{
+//        let deleteObject = fetchData[i] as Lesson
+//        context.delete(deleteObject)
+//    }
+//    do{
+//        try context.save()
+//    }catch{
+//        print(error)
+//    }
+//    
+    
         lesson.title = lesson_name
         lesson.row = Int64(row)
         lesson.colum = Int64(section)
-        do{
-            try context.save()
-            print("input!!")
-            dismiss(animated: true, completion: nil)
-            return
-        }catch{
-            print(error)
-            dismiss(animated: true, completion: nil)
-            return
-        }
+
+    do{
+        try context.save()
+         dismiss(animated: true, completion: nil)
+    }catch{
+        print(error)
+         dismiss(animated: true, completion: nil)
+    }
+    
+    dismiss(animated: true, completion: nil)
     }
     
     ///削除ボタン
@@ -65,10 +79,10 @@ class SubViewController: UIViewController {
                     }
                     do{
                         try context.save()
-                        dismiss(animated: true, completion: nil)
+                         dismiss(animated: true, completion: nil)
                     }catch{
                         print(error)
-                        dismiss(animated: true, completion: nil)
+                         dismiss(animated: true, completion: nil)
                     }
                 }
                 else{

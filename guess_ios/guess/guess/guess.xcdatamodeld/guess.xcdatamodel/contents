@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="17B42a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
     <entity name="Lesson" representedClassName="Lesson" syncable="YES">
         <attribute name="absence" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="attend" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -19,5 +20,6 @@
     <elements>
         <element name="Lesson" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="Setting" positionX="-54" positionY="54" width="128" height="105"/>
+        <element name="Entity" positionX="-54" positionY="45" width="128" height="45"/>
     </elements>
 </model>

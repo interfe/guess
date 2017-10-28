@@ -5,26 +5,21 @@
 //  Created by O_Kenta on 2017/10/21.
 //  Copyright © 2017年 O_Kenta. All rights reserved.
 //
-
 import UIKit
 import CoreData
 
 class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
-    
     @IBOutlet weak var class_sheet: UICollectionView!
     
-    
-
     let class_name = ["やまだ", "No.2","No.3","No.4","No.5"];
     //曜日の数
     let row: CGFloat = 5;
-    //何軒まであるかの数
+    //何限まであるかの数
     let colum: CGFloat = 5;
     //marginの最小単位
     let margin: CGFloat = 8;
-    
     
     var select_name = "やまだ";
     var cell_section = 0;
@@ -32,8 +27,9 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
     
     override func viewDidLoad() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
+        //        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        //        let context = delegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
         let fetchData = try! context.fetch(fetchRequest)
         if(!fetchData.isEmpty){
@@ -45,22 +41,47 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
                 lesson.row = fetchData[i].row
                 lesson.colum = fetchData[i].colum
                 
-                print("No.\(i)")
-                print(lesson.title)
-                print(lesson.room)
-                print(lesson.colum)
-                print(lesson.row)
+//                print("No.\(i)")
+//                print(lesson.title)
+//                print(lesson.room)
+//                print(lesson.colum)
+//                print(lesson.row)
             }
         }
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
+        //        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        //        let context = delegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchData = try! context.fetch(fetchRequest)
+        if(!fetchData.isEmpty){
+            for j in 0..<fetchData.count{
+                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
+                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
+                lesson.title = fetchData[j].title
+                lesson.room = fetchData[j].room
+                lesson.row = fetchData[j].row
+                lesson.colum = fetchData[j].colum
+                
+                print("Nooooo.\(j)")
+                print(lesson.title)
+                print(lesson.room)
+                print(lesson.colum)
+                print(lesson.row)
+            }
+        }
+        
         // CoreDataからデータをfetchしてくる
       ///  getData()
         // class_sheetを再読み込みする
-        class_sheet.reloadData()
+   ///     class_sheet.reloadData()
     }
     
     
@@ -98,7 +119,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let testCell:UICollectionViewCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
         
-        // Tag番号を使ってLabelのインスタンス生成
+        // Tag番号を使ってLabelの生成
         let label = testCell.contentView.viewWithTag(2) as! UILabel
         label.text = class_name[(indexPath as NSIndexPath).row]
         let label_section = testCell.contentView.viewWithTag(3) as! UILabel
@@ -106,7 +127,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let label_row = testCell.contentView.viewWithTag(4) as! UILabel
         label_row.text = String((indexPath as NSIndexPath).row);
         
-    
+        
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
         
