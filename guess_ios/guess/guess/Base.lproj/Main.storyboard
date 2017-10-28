@@ -87,6 +87,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="class_sheet" destination="1pm-Xq-whK" id="Ijs-X2-Qpj"/>
                         <segue destination="8lm-q1-A0Y" kind="modal" identifier="toSubViewController" id="9TC-QA-LFW"/>
                     </connections>
                 </viewController>
