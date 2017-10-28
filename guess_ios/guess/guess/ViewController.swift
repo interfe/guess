@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
@@ -24,7 +25,25 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     var select_name = "やまだ";
     
     override func viewDidLoad() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        var class_nameList:Array<Lesson> = []
+        let fetchData = try! context.fetch(fetchRequest)
+        if(!fetchData.isEmpty){
+            for i in 0..<fetchData.count{
+                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
+                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
+                lesson.title = fetchData[i].title
+                lesson.room = fetchData[i].room
+                print("\(i)")
+                print(lesson.title)
+                print(lesson.room)
+                print(lesson.colum)
+            }
+        }
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -38,10 +57,14 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         // Tag番号を使ってLabelのインスタンス生成
         let label = testCell.contentView.viewWithTag(2) as! UILabel
         label.text = class_name[(indexPath as NSIndexPath).row]
+        let label_section = testCell.contentView.viewWithTag(3) as! UILabel
+        label_section.text = String((indexPath as NSIndexPath).section);
+        let label_row = testCell.contentView.viewWithTag(4) as! UILabel
+        label_row.text = String((indexPath as NSIndexPath).row);
         
+    
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
-        
         
         return testCell
     }
@@ -65,13 +88,13 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
-        // [indexPath.row] から画像名を探し、UImage を設定
         let name = class_name[(indexPath as NSIndexPath).row]
-        if name != nil {
+        print(name)
+        print((indexPath as NSIndexPath).row)
+        print((indexPath as NSIndexPath).section)
             // SubViewController へ遷移するために Segue を呼び出す
             select_name = name;
             performSegue(withIdentifier: "toSubViewController",sender: nil)
-        }
     }
     
     // Segue 準備
