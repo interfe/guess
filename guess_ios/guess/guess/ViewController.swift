@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
+    
+    
+    @IBOutlet weak var class_sheet: UICollectionView!
     
     
 
@@ -21,12 +25,71 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     //marginの最小単位
     let margin: CGFloat = 8;
     
+    
     var select_name = "やまだ";
+    var cell_section = 0;
+    var cell_row = 0;
+    
     
     override func viewDidLoad() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchData = try! context.fetch(fetchRequest)
+        if(!fetchData.isEmpty){
+            for i in 0..<fetchData.count{
+                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
+                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
+                lesson.title = fetchData[i].title
+                lesson.room = fetchData[i].room
+                lesson.row = fetchData[i].row
+                lesson.colum = fetchData[i].colum
+                
+                print("No.\(i)")
+                print(lesson.title)
+                print(lesson.room)
+                print(lesson.colum)
+                print(lesson.row)
+            }
+        }
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        // CoreDataからデータをfetchしてくる
+      ///  getData()
+        // class_sheetを再読み込みする
+        class_sheet.reloadData()
+    }
+    
+    
+//
+//    func getData() {
+//        // データ保存時と同様にcontextを定義
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        do {
+//            // CoreDataからデータをfetchしてtasksに格納
+//            let fetchRequest: NSFetchRequest<Lesson> = Lesson.fetchRequest()
+//            lesson = try context.fetch(fetchRequest)
+//
+//            // tasksToShow配列を空にする。（同じデータを複数表示しないため）
+//            for key in tasksToShow.keys {
+//                tasksToShow[key] = []
+//            }
+//            // 先ほどfetchしたデータをtasksToShow配列に格納する
+//            for task in tasks {
+//                tasksToShow[task.category!]?.append(task.name!)
+//            }
+//        } catch {
+//            print("Fetching Failed.")
+//        }
+//    }
+    
+    
+    
+    
+    
     
 
     
@@ -38,10 +101,14 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         // Tag番号を使ってLabelのインスタンス生成
         let label = testCell.contentView.viewWithTag(2) as! UILabel
         label.text = class_name[(indexPath as NSIndexPath).row]
+        let label_section = testCell.contentView.viewWithTag(3) as! UILabel
+        label_section.text = String((indexPath as NSIndexPath).section);
+        let label_row = testCell.contentView.viewWithTag(4) as! UILabel
+        label_row.text = String((indexPath as NSIndexPath).row);
         
+    
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
-        
         
         return testCell
     }
@@ -65,13 +132,16 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
-        // [indexPath.row] から画像名を探し、UImage を設定
         let name = class_name[(indexPath as NSIndexPath).row]
-        if name != nil {
+        cell_section = (indexPath as NSIndexPath).section
+        cell_row = (indexPath as NSIndexPath).row
+        print(name)
+        print((indexPath as NSIndexPath).row)
+        print((indexPath as NSIndexPath).section)
             // SubViewController へ遷移するために Segue を呼び出す
             select_name = name;
+        
             performSegue(withIdentifier: "toSubViewController",sender: nil)
-        }
     }
     
     // Segue 準備
@@ -80,6 +150,8 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
             let subVC: SubViewController = (segue.destination as? SubViewController)!
             // SubViewController のselectedImgに選択された画像を設定する
             subVC.select_name = select_name;
+            subVC.section = cell_section;
+            subVC.row = cell_row;
         }
     }
     
