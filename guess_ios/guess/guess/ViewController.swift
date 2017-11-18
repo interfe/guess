@@ -32,22 +32,22 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         //        let context = delegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
         let fetchData = try! context.fetch(fetchRequest)
-        if(!fetchData.isEmpty){
-            for i in 0..<fetchData.count{
-                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
-                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
-                lesson.title = fetchData[i].title
-                lesson.room = fetchData[i].room
-                lesson.row = fetchData[i].row
-                lesson.colum = fetchData[i].colum
-                
+//        if(!fetchData.isEmpty){
+//            for i in 0..<fetchData.count{
+//                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
+//                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
+//                lesson.title = fetchData[i].title
+//                lesson.room = fetchData[i].room
+//                lesson.row = fetchData[i].row
+//                lesson.colum = fetchData[i].colum
+//
 //                print("No.\(i)")
 //                print(lesson.title)
 //                print(lesson.room)
 //                print(lesson.colum)
 //                print(lesson.row)
-            }
-        }
+//            }
+//        }
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -63,18 +63,17 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let fetchData = try! context.fetch(fetchRequest)
         if(!fetchData.isEmpty){
             for j in 0..<fetchData.count{
-                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
-                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
-                lesson.title = fetchData[j].title
-                lesson.room = fetchData[j].room
-                lesson.row = fetchData[j].row
-                lesson.colum = fetchData[j].colum
+//                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
+//                lesson.title = fetchData[j].title
+//                lesson.room = fetchData[j].room
+//                lesson.row = fetchData[j].row
+//                lesson.colum = fetchData[j].colum
                 
                 print("Nooooo.\(j)")
-                print(lesson.title)
-                print(lesson.room)
-                print(lesson.colum)
-                print(lesson.row)
+                print(fetchData[j].title)
+                print(fetchData[j].room)
+                print(fetchData[j].colum)
+                print(fetchData[j].row)
             }
         }
         
@@ -153,14 +152,18 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
+        
         let name = class_name[(indexPath as NSIndexPath).row]
         cell_section = (indexPath as NSIndexPath).section
         cell_row = (indexPath as NSIndexPath).row
+        print("セルが選択された")
         print(name)
         print((indexPath as NSIndexPath).row)
         print((indexPath as NSIndexPath).section)
             // SubViewController へ遷移するために Segue を呼び出す
             select_name = name;
+        
+
         
             performSegue(withIdentifier: "toSubViewController",sender: nil)
     }
@@ -193,7 +196,6 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         
     }
     
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

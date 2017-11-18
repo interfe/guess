@@ -20,8 +20,7 @@ class SubViewController: UIViewController {
     var section = 0;
     var row = 0;
     
-    
-    
+
 ///授業の情報を入力する
 @IBAction func class_input(_ sender: UIButton) {
 //        let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -35,8 +34,20 @@ class SubViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+    let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
+    
+    fetchRequest.predicate = predicate
+    ///セルの番号で検索
     let fetchData = try! context.fetch(fetchRequest)
-    let lesson = Lesson(context:context)
+    
+    print("フェッチdata")
+    print(fetchData)
+    
+    
+
+    
+    
+    
 //    for i in 0..<fetchData.count{
 //        let deleteObject = fetchData[i] as Lesson
 //        context.delete(deleteObject)
@@ -46,25 +57,43 @@ class SubViewController: UIViewController {
 //    }catch{
 //        print(error)
 //    }
-//    
     
-        lesson.title = lesson_name
-        lesson.row = Int64(row)
-        lesson.colum = Int64(section)
+    
+    if(!fetchData.isEmpty){
+        print("更新！！！")
+        for i in 0..<fetchData.count{
 
-    do{
-        try context.save()
-         dismiss(animated: true, completion: nil)
-    }catch{
-        print(error)
-         dismiss(animated: true, completion: nil)
+            fetchData[i].title = lesson_name;
+            fetchData[i].row = Int64(row);
+            fetchData[i].colum = Int64(section);
+        }
+        do{
+            try context.save()
+            dismiss(animated: true, completion: nil)
+        }catch{
+            print(error)
+            dismiss(animated: true, completion: nil)
+        }
     }
+        else{
+        do{
+            print("新しくついか!!")
+            let lesson = Lesson(context:context)
+            lesson.title = lesson_name
+            lesson.row = Int64(row)
+            lesson.colum = Int64(section)
+            try context.save()
+            dismiss(animated: true, completion: nil)
+        }catch{
+            print(error)
+            dismiss(animated: true, completion: nil)
+        }
+        }
     
-    dismiss(animated: true, completion: nil)
-    }
+}
     
     ///削除ボタン
-    @IBAction func delete_button(_ sender: UIButton) {
+@IBAction func delete_button(_ sender: UIButton) {
         let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
@@ -91,7 +120,18 @@ class SubViewController: UIViewController {
     }
     }
     
+    
+    
+///検索する関数
 
+//    func search() -> Int {
+//        var a: Int = 0
+//
+//        let predicate = NSPredicate(format:"%K = %@","section","section")
+//        fetchRequest.predicate = predicate
+//
+//        return a
+//    }
     
     
     override func viewDidLoad() {
@@ -100,7 +140,7 @@ class SubViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         class_name.title = select_name;
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,5 +159,6 @@ class SubViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+
