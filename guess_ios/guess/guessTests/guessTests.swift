@@ -1,15 +1,15 @@
 //
-//  guess_iosTests.swift
-//  guess_iosTests
+//  guessTests.swift
+//  guessTests
 //
-//  Created by O_Kenta on 2017/10/14.
+//  Created by O_Kenta on 2017/10/21.
 //  Copyright © 2017年 O_Kenta. All rights reserved.
 //
 
 import XCTest
-@testable import guess_ios
+@testable import guess
 
-class guess_iosTests: XCTestCase {
+class guessTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
