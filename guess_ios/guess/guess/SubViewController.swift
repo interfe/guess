@@ -23,10 +23,9 @@ class SubViewController: UIViewController {
 
 ///授業の情報を入力する
 @IBAction func class_input(_ sender: UIButton) {
-//        let delegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = delegate.persistentContainer.viewContext
-    
+//入力された文字列のインプット
         let lesson_name = class_input.text
+//入力されていなかった場合は処理はおこなわずに、戻る
         if lesson_name == "" {
             dismiss(animated: true, completion: nil)
             return
@@ -34,39 +33,28 @@ class SubViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+    //rowとcolumでデータを検索する設定をする
     let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
-    
+     //データの取得のリクエストを作る
     fetchRequest.predicate = predicate
-    ///セルの番号で検索
+     //データを取得する
     let fetchData = try! context.fetch(fetchRequest)
     
     print("フェッチdata")
     print(fetchData)
-    
-    
 
-    
-    
-    
-//    for i in 0..<fetchData.count{
-//        let deleteObject = fetchData[i] as Lesson
-//        context.delete(deleteObject)
-//    }
-//    do{
-//        try context.save()
-//    }catch{
-//        print(error)
-//    }
-    
     
     if(!fetchData.isEmpty){
+//過去にデータが作成されていた場合
         print("更新！！！")
+//データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
         for i in 0..<fetchData.count{
-
+//各項目のデータを書き換える
             fetchData[i].title = lesson_name;
             fetchData[i].row = Int64(row);
             fetchData[i].colum = Int64(section);
         }
+//データを保存する
         do{
             try context.save()
             dismiss(animated: true, completion: nil)
@@ -75,10 +63,14 @@ class SubViewController: UIViewController {
             dismiss(animated: true, completion: nil)
         }
     }
+//過去に作成されていなかった場合
         else{
+//新しくデータの追加
         do{
             print("新しくついか!!")
+//データベース全体を取得
             let lesson = Lesson(context:context)
+//データを追加
             lesson.title = lesson_name
             lesson.row = Int64(row)
             lesson.colum = Int64(section)
@@ -92,13 +84,11 @@ class SubViewController: UIViewController {
     
 }
     
-    ///削除ボタン
+///削除ボタン
 @IBAction func delete_button(_ sender: UIButton) {
         let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
-//                let predicate = NSPredicate(format:"%K = %d","colum",0)
-//                fetchRequest.predicate = predicate
                 let fetchData = try! context.fetch(fetchRequest)
                 if(!fetchData.isEmpty){
                     print("delete!!")
@@ -119,20 +109,7 @@ class SubViewController: UIViewController {
                     
     }
     }
-    
-    
-    
-///検索する関数
 
-//    func search() -> Int {
-//        var a: Int = 0
-//
-//        let predicate = NSPredicate(format:"%K = %@","section","section")
-//        fetchRequest.predicate = predicate
-//
-//        return a
-//    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

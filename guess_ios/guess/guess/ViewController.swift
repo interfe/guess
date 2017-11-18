@@ -12,7 +12,7 @@ class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var class_sheet: UICollectionView!
-    
+    //授業名（仮）
     let class_name = ["やまだ", "No.2","No.3","No.4","No.5"];
     //曜日の数
     let row: CGFloat = 5;
@@ -25,93 +25,39 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     var cell_section = 0;
     var cell_row = 0;
     
-    
+    //読み込み時に行う処理
     override func viewDidLoad() {
-        //        let delegate = UIApplication.shared.delegate as! AppDelegate
+        //データベースからの呼び出し
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        //        let context = delegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
         let fetchData = try! context.fetch(fetchRequest)
-//        if(!fetchData.isEmpty){
-//            for i in 0..<fetchData.count{
-//                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
-//                let lesson = NSManagedObject(entity:entity!,insertInto:context) as! Lesson
-//                lesson.title = fetchData[i].title
-//                lesson.room = fetchData[i].room
-//                lesson.row = fetchData[i].row
-//                lesson.colum = fetchData[i].colum
-//
-//                print("No.\(i)")
-//                print(lesson.title)
-//                print(lesson.room)
-//                print(lesson.colum)
-//                print(lesson.row)
-//            }
-//        }
+
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     
-    
+    //画面表示時毎におこなう処理
     override func viewWillAppear(_ animated: Bool) {
-        //        let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        //        let context = delegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
         let fetchData = try! context.fetch(fetchRequest)
+//データベース確認用のソース
         if(!fetchData.isEmpty){
             for j in 0..<fetchData.count{
-//                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: context)
-//                lesson.title = fetchData[j].title
-//                lesson.room = fetchData[j].room
-//                lesson.row = fetchData[j].row
-//                lesson.colum = fetchData[j].colum
                 
-                print("Nooooo.\(j)")
+                print("No.\(j)")
                 print(fetchData[j].title)
                 print(fetchData[j].room)
                 print(fetchData[j].colum)
                 print(fetchData[j].row)
             }
+            
         }
-        
-        // CoreDataからデータをfetchしてくる
-      ///  getData()
-        // class_sheetを再読み込みする
-   ///     class_sheet.reloadData()
-    }
-    
-    
-//
-//    func getData() {
-//        // データ保存時と同様にcontextを定義
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//        do {
-//            // CoreDataからデータをfetchしてtasksに格納
-//            let fetchRequest: NSFetchRequest<Lesson> = Lesson.fetchRequest()
-//            lesson = try context.fetch(fetchRequest)
-//
-//            // tasksToShow配列を空にする。（同じデータを複数表示しないため）
-//            for key in tasksToShow.keys {
-//                tasksToShow[key] = []
-//            }
-//            // 先ほどfetchしたデータをtasksToShow配列に格納する
-//            for task in tasks {
-//                tasksToShow[task.category!]?.append(task.name!)
-//            }
-//        } catch {
-//            print("Fetching Failed.")
-//        }
-//    }
-    
-    
-    
-    
-    
-    
+//データベース確認用のソースここまで
 
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // "Cell" はストーリーボードで設定したセルのID
@@ -120,16 +66,15 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         
         // Tag番号を使ってLabelの生成
         let label = testCell.contentView.viewWithTag(2) as! UILabel
+        //(indexPath as NSIndexPath).rowでrow番号を取得
         label.text = class_name[(indexPath as NSIndexPath).row]
         let label_section = testCell.contentView.viewWithTag(3) as! UILabel
+                //(indexPath as NSIndexPath).sectionでsection番号を取得
         label_section.text = String((indexPath as NSIndexPath).section);
         let label_row = testCell.contentView.viewWithTag(4) as! UILabel
         label_row.text = String((indexPath as NSIndexPath).row);
-        
-        
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
-        
         return testCell
     }
     
@@ -162,9 +107,6 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         print((indexPath as NSIndexPath).section)
             // SubViewController へ遷移するために Segue を呼び出す
             select_name = name;
-        
-
-        
             performSegue(withIdentifier: "toSubViewController",sender: nil)
     }
     
@@ -172,14 +114,12 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "toSubViewController") {
             let subVC: SubViewController = (segue.destination as? SubViewController)!
-            // SubViewController のselectedImgに選択された画像を設定する
+            // SubViewController のsectionとrowを渡す
             subVC.select_name = select_name;
             subVC.section = cell_section;
             subVC.row = cell_row;
         }
     }
-    
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         //int型に変換
@@ -193,15 +133,11 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let a:Int = Int(row)
         // 要素数を入れる、要素以上の数字を入れると表示でエラーとなる
         return a;
-        
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
