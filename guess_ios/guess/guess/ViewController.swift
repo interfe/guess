@@ -34,6 +34,8 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
 
         super.viewDidLoad()
         
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -43,8 +45,10 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
         let fetchData = try! context.fetch(fetchRequest)
+        self.class_sheet.reloadData()
 //データベース確認用のソース
         if(!fetchData.isEmpty){
+
             for j in 0..<fetchData.count{
                 
                 print("No.\(j)")
@@ -53,7 +57,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
                 print(fetchData[j].colum)
                 print(fetchData[j].row)
             }
-            
+
         }
 //データベース確認用のソースここまで
 
@@ -63,16 +67,55 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         // "Cell" はストーリーボードで設定したセルのID
         let testCell:UICollectionViewCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+       let cell_row = (indexPath as NSIndexPath).row
+        let cell_section = (indexPath as NSIndexPath).section
         
-        // Tag番号を使ってLabelの生成
-        let label = testCell.contentView.viewWithTag(2) as! UILabel
-        //(indexPath as NSIndexPath).rowでrow番号を取得
-        label.text = class_name[(indexPath as NSIndexPath).row]
-        let label_section = testCell.contentView.viewWithTag(3) as! UILabel
-                //(indexPath as NSIndexPath).sectionでsection番号を取得
-        label_section.text = String((indexPath as NSIndexPath).section);
-        let label_row = testCell.contentView.viewWithTag(4) as! UILabel
-        label_row.text = String((indexPath as NSIndexPath).row);
+        //rowとcolumでデータを検索する設定をする
+        let predicate = NSPredicate(format:"(row == %d && colum == %d)", cell_row, cell_section )
+        
+        //データの取得のリクエストを作る
+        fetchRequest.predicate = predicate
+        //データを取得する
+        let fetchData = try! context.fetch(fetchRequest)
+        
+        if(!fetchData.isEmpty){
+            //過去にデータが作成されていた場合
+            print("表示！！！")
+            //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
+            for i in 0..<fetchData.count{
+let label = testCell.contentView.viewWithTag(2) as! UILabel
+                label.text = fetchData[i].title
+
+            }
+        } else {
+            let label = testCell.contentView.viewWithTag(2) as! UILabel
+            label.text = nil
+        }
+        
+        
+        
+        
+        
+        // "Cell" はストーリーボードで設定したセルのID
+//        let testCell:UICollectionViewCell =
+//            collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
+        
+        
+        
+        
+        
+        
+//        // Tag番号を使ってLabelの生成
+//        let label = testCell.contentView.viewWithTag(2) as! UILabel
+//        //(indexPath as NSIndexPath).rowでrow番号を取得
+//        label.text = class_name[(indexPath as NSIndexPath).row]
+//        let label_section = testCell.contentView.viewWithTag(3) as! UILabel
+//        //(indexPath as NSIndexPath).sectionでsection番号を取得
+//        label_section.text = String((indexPath as NSIndexPath).section);
+//        let label_row = testCell.contentView.viewWithTag(4) as! UILabel
+//        label_row.text = String((indexPath as NSIndexPath).row);
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
         return testCell
