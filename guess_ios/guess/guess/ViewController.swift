@@ -118,9 +118,9 @@ label_section.text = String(fetchData[i].colum)
         
         // 横に5つの、縦に5つのCellを入れることを想定して、多少のマージンを入れる
         // セルの横のサイズの計算
-        let cellSize_w:CGFloat = (self.view.frame.size.width)/(row)-row*3;
+        let cellSize_w:CGFloat = (self.view.frame.size.width-56)/(row)-row*2;
         //セルの縦のサイズの計算（スクロールさせないためにUICollectionViewの上下のマージン分を除く）
-        let cellSize_h:CGFloat = (self.view.frame.size.height-(margin*12+margin*3))/(colum)-colum*3;
+        let cellSize_h:CGFloat = (self.view.frame.size.height-(132))/(colum)-colum*2;
         // 計算したセルのwidth,heightを返り値にする
         return CGSize(width: cellSize_w, height: cellSize_h)
     }
