@@ -15,6 +15,7 @@ class SubViewController: UIViewController {
     @IBOutlet weak var buttan_input: UIButton!
     @IBOutlet weak var class_input: UITextField!
     @IBOutlet weak var Lesson_delete: UIButton!
+    @IBOutlet weak var delete_all: UIButton!
     
     var select_name = "やまだ";
     var section = 0;
@@ -86,10 +87,15 @@ class SubViewController: UIViewController {
     
 ///削除ボタン
 @IBAction func delete_button(_ sender: UIButton) {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-                let context = delegate.persistentContainer.viewContext
-                let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
-                let fetchData = try! context.fetch(fetchRequest)
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+    //rowとcolumでデータを検索する設定をする
+    let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
+    //データの取得のリクエストを作る
+    fetchRequest.predicate = predicate
+    //データを取得する
+    let fetchData = try! context.fetch(fetchRequest)
+
                 if(!fetchData.isEmpty){
                     print("delete!!")
                     for i in 0..<fetchData.count{
@@ -109,6 +115,33 @@ class SubViewController: UIViewController {
                     
     }
     }
+    
+    ///すべて削除button
+    @IBAction func delete_all_button(_ sender: Any) {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchData = try! context.fetch(fetchRequest)
+        if(!fetchData.isEmpty){
+            print("delete!!")
+            for i in 0..<fetchData.count{
+                let deleteObject = fetchData[i] as Lesson
+                context.delete(deleteObject)
+            }
+            do{
+                try context.save()
+                dismiss(animated: true, completion: nil)
+            }catch{
+                print(error)
+                dismiss(animated: true, completion: nil)
+            }
+        }
+        else{
+            dismiss(animated: true, completion: nil)
+            
+        }
+    }
+    
 
     
     override func viewDidLoad() {
