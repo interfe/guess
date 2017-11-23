@@ -41,20 +41,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-uT-lDW">
-                                                    <rect key="frame" x="24.5" y="8" width="52.5" height="18"/>
-                                                    <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-uT-lDW">
+                                                    <rect key="frame" x="27.5" y="8" width="46.5" height="16"/>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="16"/>
                                                     <color key="textColor" red="1" green="0.61530453360000004" blue="0.31117882079999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Td-Lx-LrR">
-                                                    <rect key="frame" x="16" y="34" width="68" height="12"/>
+                                                    <rect key="frame" x="16" y="32" width="68" height="12"/>
                                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcA-bZ-Kko">
-                                                    <rect key="frame" x="16" y="54" width="68" height="12"/>
+                                                    <rect key="frame" x="16" y="52" width="68" height="12"/>
                                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -84,11 +84,27 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="A5U-pd-jxl"/>
                                 </connections>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aX2-G9-Grv">
+                                <rect key="frame" x="0.0" y="16" width="375" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.61530453360000004" blue="0.31117882079999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <color key="textColor" red="1" green="0.61530453360000004" blue="0.31117882079999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Guess" id="IVw-5x-mSN"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1pm-Xq-whK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-24" id="0Lc-UQ-bfO"/>
                             <constraint firstItem="1pm-Xq-whK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="96" id="4RR-Kg-x8n"/>
+                            <constraint firstItem="aX2-G9-Grv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="16" id="9Fd-IB-coh"/>
+                            <constraint firstItem="aX2-G9-Grv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Jl7-bf-64d"/>
+                            <constraint firstItem="aX2-G9-Grv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="UCq-nX-0Qo"/>
                             <constraint firstItem="1pm-Xq-whK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-24" id="ib2-ae-z86"/>
                             <constraint firstItem="1pm-Xq-whK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="sMF-sL-Zc9"/>
                         </constraints>
@@ -140,7 +156,7 @@
                                     <action selector="class_input:" destination="8lm-q1-A0Y" eventType="touchUpInside" id="kow-tc-HmC"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-gA-FFd">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-gA-FFd">
                                 <rect key="frame" x="0.0" y="16" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ki7-Na-Och"/>
