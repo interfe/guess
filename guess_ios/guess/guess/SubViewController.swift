@@ -148,8 +148,23 @@ class SubViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        class_name.title = select_name;
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        //rowとcolumでデータを検索する設定をする
+        let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
+        //データの取得のリクエストを作る
+        fetchRequest.predicate = predicate
+        //データを取得する
+        let fetchData = try! context.fetch(fetchRequest)
+        if(!fetchData.isEmpty){
+            //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
+            for i in 0..<fetchData.count{
+                //各項目のデータを書き換える
+                class_name.title = fetchData[i].title
+            }
+            } else {
+                class_name.title = "新規作成"
+            }
 
     }
 

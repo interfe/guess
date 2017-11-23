@@ -93,29 +93,7 @@ let label = testCell.contentView.viewWithTag(2) as! UILabel
             let label = testCell.contentView.viewWithTag(2) as! UILabel
             label.text = nil
         }
-        
-        
-        
-        
-        
-        // "Cell" はストーリーボードで設定したセルのID
-//        let testCell:UICollectionViewCell =
-//            collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
-        
-        
-        
-        
-        
-        
-//        // Tag番号を使ってLabelの生成
-//        let label = testCell.contentView.viewWithTag(2) as! UILabel
-//        //(indexPath as NSIndexPath).rowでrow番号を取得
-//        label.text = class_name[(indexPath as NSIndexPath).row]
-//        let label_section = testCell.contentView.viewWithTag(3) as! UILabel
-//        //(indexPath as NSIndexPath).sectionでsection番号を取得
-//        label_section.text = String((indexPath as NSIndexPath).section);
-//        let label_row = testCell.contentView.viewWithTag(4) as! UILabel
-//        label_row.text = String((indexPath as NSIndexPath).row);
+
         //セルの背景色
         testCell.backgroundColor = UIColor.cyan
         return testCell
