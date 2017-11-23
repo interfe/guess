@@ -165,11 +165,15 @@ class SubViewController: UIViewController {
             } else {
                 class_name.title = "新規作成"
             }
+        
+        //角丸に
+          buttan_input.layer.cornerRadius = 5.0
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     

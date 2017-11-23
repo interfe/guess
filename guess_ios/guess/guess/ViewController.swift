@@ -13,7 +13,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var class_sheet: UICollectionView!
     //授業名（仮）
-    let class_name = ["やまだ", "No.2","No.3","No.4","No.5"];
+    //let class_name = ["やまだ", "No.2","No.3","No.4","No.5"];
     //曜日の数
     let row: CGFloat = 5;
     //何限まであるかの数
@@ -72,6 +72,9 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
        let cell_row = (indexPath as NSIndexPath).row
         let cell_section = (indexPath as NSIndexPath).section
         
+        //角丸にする
+        testCell.layer.cornerRadius = 5.0
+        
         //rowとcolumでデータを検索する設定をする
         let predicate = NSPredicate(format:"(row == %d && colum == %d)", cell_row, cell_section )
         
@@ -80,22 +83,30 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         //データを取得する
         let fetchData = try! context.fetch(fetchRequest)
         
+        print("表示！！！")
+        let label_title = testCell.contentView.viewWithTag(2) as! UILabel
+        let label_row = testCell.contentView.viewWithTag(3) as! UILabel
+        let label_section = testCell.contentView.viewWithTag(4) as! UILabel
+        
         if(!fetchData.isEmpty){
             //過去にデータが作成されていた場合
-            print("表示！！！")
+           
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
-let label = testCell.contentView.viewWithTag(2) as! UILabel
-                label.text = fetchData[i].title
 
+                label_title.text = fetchData[i].title
+                label_row.text = String(fetchData[i].row)
+label_section.text = String(fetchData[i].colum)
             }
         } else {
-            let label = testCell.contentView.viewWithTag(2) as! UILabel
-            label.text = nil
+            
+            label_title.text = nil
+            label_row.text = nil
+            label_section.text = nil
         }
 
         //セルの背景色
-        testCell.backgroundColor = UIColor.cyan
+        testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
         return testCell
     }
     
@@ -117,17 +128,11 @@ let label = testCell.contentView.viewWithTag(2) as! UILabel
     // Cell が選択された場合
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        
-        
-        let name = class_name[(indexPath as NSIndexPath).row]
+
         cell_section = (indexPath as NSIndexPath).section
         cell_row = (indexPath as NSIndexPath).row
-        print("セルが選択された")
-        print(name)
-        print((indexPath as NSIndexPath).row)
-        print((indexPath as NSIndexPath).section)
+
             // SubViewController へ遷移するために Segue を呼び出す
-            select_name = name;
             performSegue(withIdentifier: "toSubViewController",sender: nil)
     }
     
@@ -136,7 +141,6 @@ let label = testCell.contentView.viewWithTag(2) as! UILabel
         if (segue.identifier == "toSubViewController") {
             let subVC: SubViewController = (segue.destination as? SubViewController)!
             // SubViewController のsectionとrowを渡す
-            subVC.select_name = select_name;
             subVC.section = cell_section;
             subVC.row = cell_row;
         }
