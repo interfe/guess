@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  guess_ios
+//  guess
 //
-//  Created by O_Kenta on 2017/10/14.
+//  Created by O_Kenta on 2017/10/21.
 //  Copyright © 2017年 O_Kenta. All rights reserved.
 //
 
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "guess_ios")
+        let container = NSPersistentContainer(name: "guess")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
