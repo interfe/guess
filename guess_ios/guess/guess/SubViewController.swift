@@ -17,7 +17,6 @@ class SubViewController: UIViewController {
     @IBOutlet weak var Lesson_delete: UIButton!
     @IBOutlet weak var delete_all: UIButton!
     
-    var select_name = "やまだ";
     var section = 0;
     var row = 0;
     
@@ -34,6 +33,7 @@ class SubViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+    
     //rowとcolumでデータを検索する設定をする
     let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
      //データの取得のリクエストを作る

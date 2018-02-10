@@ -20,9 +20,9 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     let colum: CGFloat = 5;
     //marginの最小単位
     let margin: CGFloat = 8;
-    
-    var select_name = "やまだ";
+    //cell_sectionの初期値を設定
     var cell_section = 0;
+    //cell_rowの初期値を設定
     var cell_row = 0;
     
     //読み込み時に行う処理
@@ -34,17 +34,17 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
 
         super.viewDidLoad()
         
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     
     //画面表示時毎におこなう処理
     override func viewWillAppear(_ animated: Bool) {
+        //データベースの呼び出し
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
         let fetchData = try! context.fetch(fetchRequest)
+        //時間割の表示のリフレッシュ
         self.class_sheet.reloadData()
 //データベース確認用のソース
         if(!fetchData.isEmpty){
