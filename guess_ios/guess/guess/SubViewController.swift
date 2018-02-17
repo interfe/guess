@@ -31,6 +31,7 @@ class SubViewController: UIViewController {
             return
         }
 
+
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
     

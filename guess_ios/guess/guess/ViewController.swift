@@ -25,13 +25,18 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     //cell_rowの初期値を設定
     var cell_row = 0;
     
+    func open_DB() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+//        let fetchData = try! context.fetch(fetchRequest)
+        return
+    }
+    
     //読み込み時に行う処理
     override func viewDidLoad() {
         //データベースからの呼び出し
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
-        let fetchData = try! context.fetch(fetchRequest)
-
+        open_DB()
+ 
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -41,39 +46,35 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     //画面表示時毎におこなう処理
     override func viewWillAppear(_ animated: Bool) {
         //データベースの呼び出し
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
-        let fetchData = try! context.fetch(fetchRequest)
+        open_DB()
+        
         //時間割の表示のリフレッシュ
         self.class_sheet.reloadData()
+        
 //データベース確認用のソース
-        if(!fetchData.isEmpty){
-
-            for j in 0..<fetchData.count{
-                
-                print("No.\(j)")
-                print(fetchData[j].title)
-                print(fetchData[j].room)
-                print(fetchData[j].colum)
-                print(fetchData[j].row)
-            }
-
-        }
+//        if(!fetchData.isEmpty){
+//
+//            for j in 0..<fetchData.count{
+//
+//                print("No.\(j)")
+//                print(fetchData[j].title)
+//                print(fetchData[j].room)
+//                print(fetchData[j].colum)
+//                print(fetchData[j].row)
+//            }
+//
+//        }
 //データベース確認用のソースここまで
 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // "Cell" はストーリーボードで設定したセルのID
-        let testCell:UICollectionViewCell =
-            collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
+        let testCell:UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
        let cell_row = (indexPath as NSIndexPath).row
         let cell_section = (indexPath as NSIndexPath).section
-        
-        //角丸にする
-        testCell.layer.cornerRadius = 5.0
         
         //rowとcolumでデータを検索する設定をする
         let predicate = NSPredicate(format:"(row == %d && colum == %d)", cell_row, cell_section )
@@ -90,31 +91,27 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         
         if(!fetchData.isEmpty){
             //過去にデータが作成されていた場合
-           
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
-
                 label_title.text = fetchData[i].title
                 label_row.text = String(fetchData[i].row)
-label_section.text = String(fetchData[i].colum)
+                label_section.text = String(fetchData[i].colum)
             }
         } else {
-            
             label_title.text = nil
             label_row.text = nil
             label_section.text = nil
         }
 
+        //角丸にする
+        testCell.layer.cornerRadius = 5.0
         //セルの背景色
         testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
         return testCell
     }
     
-    // Screenサイズに応じたセルサイズを返す
-    // UICollectionViewDelegateFlowLayoutの設定が必要
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+    // Screenサイズに応じたセルサイズを返す　UICollectionViewDelegateFlowLayoutの設定が必要
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         // 横に5つの、縦に5つのCellを入れることを想定して、多少のマージンを入れる
         // セルの横のサイズの計算
@@ -126,8 +123,7 @@ label_section.text = String(fetchData[i].colum)
     }
     
     // Cell が選択された場合
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath) {
 
         cell_section = (indexPath as NSIndexPath).section
         cell_row = (indexPath as NSIndexPath).row
