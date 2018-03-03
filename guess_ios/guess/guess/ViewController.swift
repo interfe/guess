@@ -82,7 +82,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         //データを取得する
         let fetchData = try! context.fetch(fetchRequest)
         
-        print("表示！！！")
+      //  print("表示！！！")
         let label_title = testCell.contentView.viewWithTag(2) as! UILabel
         let label_row = testCell.contentView.viewWithTag(3) as! UILabel
         let label_section = testCell.contentView.viewWithTag(4) as! UILabel
@@ -92,7 +92,8 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
                 label_title.text = fetchData[i].title
-                label_row.text = String(fetchData[i].row)
+//                label_row.text = String(fetchData[i].row)
+                label_row.text = String(fetchData[i].attend)
                 label_section.text = String(fetchData[i].colum)
             }
         } else {
