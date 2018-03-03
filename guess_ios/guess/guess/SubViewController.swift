@@ -16,6 +16,16 @@ class SubViewController: UIViewController {
     @IBOutlet weak var class_input: UITextField!
     @IBOutlet weak var Lesson_delete: UIButton!
     @IBOutlet weak var delete_all: UIButton!
+    @IBOutlet weak var class_label: UILabel!
+    @IBOutlet weak var attend_no: UILabel!
+    @IBOutlet weak var absence_no: UILabel!
+    @IBOutlet weak var attend_input: UIStepper!
+    @IBOutlet weak var absence_input: UIStepper!
+    @IBOutlet weak var cancel_no: UILabel!
+    @IBOutlet weak var late_no: UILabel!
+    @IBOutlet weak var late_input: UIStepper!
+    
+    
     
     var section = 0;
     var row = 0;
@@ -163,9 +173,7 @@ class SubViewController: UIViewController {
             for i in 0..<fetchData.count{
                 //各項目のデータを書き換える
 //                class_input.placeholder = fetchData[i].title;
-                let classtxt = fetchData[i].title;
                 class_name.title = fetchData[i].title;
-                
                 class_input.attributedPlaceholder = NSAttributedString(string: fetchData[i].title!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.black]);
             }
             } else {
