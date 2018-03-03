@@ -162,8 +162,11 @@ class SubViewController: UIViewController {
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
                 //各項目のデータを書き換える
-                class_input.placeholder = fetchData[i].title;
-                class_name.title = fetchData[i].title
+//                class_input.placeholder = fetchData[i].title;
+                let classtxt = fetchData[i].title;
+                class_name.title = fetchData[i].title;
+                
+                class_input.attributedPlaceholder = NSAttributedString(string: fetchData[i].title!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.black]);
             }
             } else {
                 class_name.title = "新規作成"
