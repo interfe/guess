@@ -92,7 +92,8 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
                 label_title.text = fetchData[i].title
-                label_row.text = String(fetchData[i].row)
+//                label_row.text = String(fetchData[i].row)
+                label_row.text = String(fetchData[i].attend)
                 label_section.text = String(fetchData[i].colum)
             }
         } else {

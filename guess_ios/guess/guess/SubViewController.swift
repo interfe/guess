@@ -52,6 +52,7 @@ class SubViewController: UIViewController {
 //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
         for i in 0..<fetchData.count{
 //各項目のデータを書き換える
+            
             fetchData[i].title = lesson_name;
             fetchData[i].row = Int64(row);
             fetchData[i].colum = Int64(section);
@@ -161,6 +162,7 @@ class SubViewController: UIViewController {
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
                 //各項目のデータを書き換える
+                class_input.placeholder = fetchData[i].title;
                 class_name.title = fetchData[i].title
             }
             } else {
