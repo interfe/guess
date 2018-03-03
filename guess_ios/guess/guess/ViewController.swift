@@ -90,7 +90,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let fetchData_setting = try! context.fetch(fetchRequest_setting)
         
         
-        print("表示！！！")
+      //  print("表示！！！")
         let label_title = testCell.contentView.viewWithTag(2) as! UILabel
         let label_row = testCell.contentView.viewWithTag(3) as! UILabel
         let label_section = testCell.contentView.viewWithTag(4) as! UILabel
@@ -99,6 +99,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         if(!fetchData_lesson.isEmpty){
             //過去にデータが作成されていた場合
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
+
             for i in 0..<fetchData_lesson.count{
                 label_title.text = fetchData_lesson[i].title
                 label_row.text = String(fetchData_lesson[i].row)
@@ -127,6 +128,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
                 // セルの背景色
                    testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
                 }
+
             }
         } else {
             label_title.text = nil

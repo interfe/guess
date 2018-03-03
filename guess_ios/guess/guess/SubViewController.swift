@@ -16,15 +16,121 @@ class SubViewController: UIViewController {
     @IBOutlet weak var class_input: UITextField!
     @IBOutlet weak var Lesson_delete: UIButton!
     @IBOutlet weak var delete_all: UIButton!
+    @IBOutlet weak var class_label: UILabel!
+    @IBOutlet weak var attend_no: UILabel!
+    @IBOutlet weak var absence_no: UILabel!
+    @IBOutlet weak var attend_input: UIStepper!
+    @IBOutlet weak var absence_input: UIStepper!
+    @IBOutlet weak var cancel_no: UILabel!
+    @IBOutlet weak var late_no: UILabel!
+    @IBOutlet weak var late_input: UIStepper!
+    @IBOutlet weak var cancel_input: UIStepper!
+    
+    
+    
     
     var section = 0;
     var row = 0;
+    var attend_text = 0;
+    var absence_text = 0;
+    var late_text = 0;
+    var cancel_text=0;
     
+    @IBAction func attend_input(_ sender: UIStepper) {
+        
+        attend_no.text="\(sender.value)";
+        
+        attend_text = Int(sender.value);
+        print(attend_text);
+    }
+    
+    @IBAction func absebce_input(_ sender: UIStepper) {
+        
+        absence_no.text="\(sender.value)";
+        absence_text = Int(sender.value);
+    }
 
+    @IBAction func cancel_input(_ sender: UIStepper) {
+        cancel_no.text="\(sender.value)";
+        cancel_text = Int(sender.value);
+    }
+    
+    @IBAction func late_input(_ sender: UIStepper) {
+        late_no.text="\(sender.value)";
+        late_text = Int(sender.value);
+       
+    }
+    
+    
+    
+    
+    func input_attend() {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        
+        //rowとcolumでデータを検索する設定をする
+        let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
+        //データの取得のリクエストを作る
+        fetchRequest.predicate = predicate
+        //データを取得する
+        let fetchData = try! context.fetch(fetchRequest)
+        
+        print("フェッチdata")
+        print(fetchData)
+        
+        if(!fetchData.isEmpty){
+            //過去にデータが作成されていた場合
+            print("更新！！！")
+            //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
+            for i in 0..<fetchData.count{
+                //各項目のデータを書き換える
+                fetchData[i].attend=Int64(attend_text);
+                fetchData[i].absence=Int64(absence_text);
+                fetchData[i].cancel=Int64(cancel_text);
+                fetchData[i].late=Int64(late_text);
+                print(fetchData[i].attend);
+            }
+            //データを保存する
+            do{
+                try context.save()
+                dismiss(animated: true, completion: nil)
+            }catch{
+                print(error)
+                dismiss(animated: true, completion: nil)
+            }
+        }
+            //過去に作成されていなかった場合
+        else{
+            //新しくデータの追加
+            do{
+                try context.save()
+                dismiss(animated: true, completion: nil)
+            }catch{
+                print(error)
+                dismiss(animated: true, completion: nil)
+            }
+        }
+        return
+    }
+        
+        
+        
+        
+        
+    
+    
+    
+    
 ///授業の情報を入力する
 @IBAction func class_input(_ sender: UIButton) {
-//入力された文字列のインプット
+    
+    input_attend()
+    
+//入力された情報のインプット
         let lesson_name = class_input.text
+    print("あてんど")
+    print(attend_text);
 //入力されていなかった場合は処理はおこなわずに、戻る
         if lesson_name == "" {
             dismiss(animated: true, completion: nil)
@@ -48,13 +154,16 @@ class SubViewController: UIViewController {
     
     if(!fetchData.isEmpty){
 //過去にデータが作成されていた場合
-        print("更新！！！")
+        print("欠席可能数更新！！！")
 //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
         for i in 0..<fetchData.count{
 //各項目のデータを書き換える
+            
             fetchData[i].title = lesson_name;
             fetchData[i].row = Int64(row);
             fetchData[i].colum = Int64(section);
+            fetchData[i].attend=Int64(attend_text);
+            print(fetchData[i].attend);
         }
 //データを保存する
         do{
@@ -145,6 +254,11 @@ class SubViewController: UIViewController {
     
 
     
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -161,7 +275,14 @@ class SubViewController: UIViewController {
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
             for i in 0..<fetchData.count{
                 //各項目のデータを書き換える
-                class_name.title = fetchData[i].title
+//                class_input.placeholder = fetchData[i].title;
+                class_name.title = fetchData[i].title;
+                class_input.attributedPlaceholder = NSAttributedString(string: fetchData[i].title!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.black]);
+                print(fetchData[i].attend)
+                attend_no.text = String(fetchData[i].attend);
+                absence_no.text = String(fetchData[i].absence);
+                cancel_no.text = String(fetchData[i].cancel);
+                late_no.text = String(fetchData[i].late);
             }
             } else {
                 class_name.title = "新規作成"
