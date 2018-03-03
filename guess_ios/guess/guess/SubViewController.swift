@@ -48,7 +48,7 @@ class SubViewController: UIViewController {
     
     if(!fetchData.isEmpty){
 //過去にデータが作成されていた場合
-        print("更新！！！")
+        print("欠席可能数更新！！！")
 //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
         for i in 0..<fetchData.count{
 //各項目のデータを書き換える
