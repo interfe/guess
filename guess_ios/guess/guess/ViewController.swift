@@ -22,11 +22,14 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     var cell_section = 0;
     //cell_rowの初期値を設定
     var cell_row = 0;
+
     
     func open_DB() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
-//        let fetchData = try! context.fetch(fetchRequest)
+        let fetchRequest_lesson:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchRequest_setting:NSFetchRequest<Setting> = Setting.fetchRequest()
+        
+        //        let fetchData = try! context.fetch(fetchRequest)
         return
     }
     
@@ -70,7 +73,9 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         // "Cell" はストーリーボードで設定したセルのID
         let testCell:UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",for: indexPath)
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchRequest_lesson:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchRequest_setting:NSFetchRequest<Setting> = Setting.fetchRequest()
+
        let cell_row = (indexPath as NSIndexPath).row
         let cell_section = (indexPath as NSIndexPath).section
         
@@ -78,33 +83,61 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         let predicate = NSPredicate(format:"(row == %d && colum == %d)", cell_row, cell_section )
         
         //データの取得のリクエストを作る
-        fetchRequest.predicate = predicate
+        fetchRequest_lesson.predicate = predicate
         //データを取得する
-        let fetchData = try! context.fetch(fetchRequest)
+        
+        let fetchData_lesson = try! context.fetch(fetchRequest_lesson)
+        let fetchData_setting = try! context.fetch(fetchRequest_setting)
+        
         
         print("表示！！！")
         let label_title = testCell.contentView.viewWithTag(2) as! UILabel
         let label_row = testCell.contentView.viewWithTag(3) as! UILabel
         let label_section = testCell.contentView.viewWithTag(4) as! UILabel
-        
-        if(!fetchData.isEmpty){
+        var absense_rate = 0.8
+
+        if(!fetchData_lesson.isEmpty){
             //過去にデータが作成されていた場合
             //データの書き換えをおこなう（複数ある場合を想定してfor文になっている）
-            for i in 0..<fetchData.count{
-                label_title.text = fetchData[i].title
-                label_row.text = String(fetchData[i].row)
-                label_section.text = String(fetchData[i].colum)
+            for i in 0..<fetchData_lesson.count{
+                label_title.text = fetchData_lesson[i].title
+                label_row.text = String(fetchData_lesson[i].row)
+                label_section.text = String(fetchData_lesson[i].colum)
+                //以下テスト用
+                //absense_rate = 0.2 * Double(fetchData_lesson[i].row)
+                //欠席数/欠席可能数　によって色を出し分け
+               // absense_rate = 1 - Double(fetchData_lesson[i].absence/fetchData_setting[i].no_absence)
+                switch absense_rate {
+                // 青信号
+                case 0.7...1.0:
+                      testCell.backgroundColor = UIColor(red: 0.416, green: 0.890, blue: 0.545, alpha: 0.85)
+                    
+                case 0.3..<0.7:
+                // 黄色信号
+                    testCell.backgroundColor = UIColor(red: 0.965, green: 0.792, blue: 0.373, alpha: 0.85)
+
+                case 0.0..<0.3:
+                //　赤信号
+                     testCell.backgroundColor = UIColor(red: 0.890, green: 0.286, blue: 0.239, alpha: 0.85)
+                case ..<0:
+                //  DEAD 黒
+                     testCell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.85)
+                    
+                default:
+                // セルの背景色
+                   testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
+                }
             }
         } else {
             label_title.text = nil
             label_row.text = nil
             label_section.text = nil
+            // セルの背景色
+            testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
         }
 
         //角丸にする
         testCell.layer.cornerRadius = 5.0
-        //セルの背景色
-        testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
         return testCell
     }
     
