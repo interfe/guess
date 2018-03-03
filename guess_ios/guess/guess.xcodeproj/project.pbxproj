@@ -22,6 +22,7 @@
 		2981FB351F9B3FFF00B8D5C5 /* SubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2981FB331F9B3FFF00B8D5C5 /* SubViewController.swift */; };
 		2981FB361F9B3FFF00B8D5C5 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2981FB341F9B3FFF00B8D5C5 /* SubViewController.xib */; };
 		29A4B60F1FC6C07A000E5696 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4B60E1FC6C07A000E5696 /* CollectionViewCell.swift */; };
+		3FFC8DBA204ABAAD00381F42 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC8DB9204ABAAD00381F42 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		2981FB331F9B3FFF00B8D5C5 /* SubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubViewController.swift; sourceTree = "<group>"; };
 		2981FB341F9B3FFF00B8D5C5 /* SubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 		29A4B60E1FC6C07A000E5696 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		3FFC8DB9204ABAAD00381F42 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				2937D4C81F9B1AD60085DB15 /* AppDelegate.swift */,
 				2937D4CA1F9B1AD60085DB15 /* ViewController.swift */,
 				2937D4CC1F9B1AD60085DB15 /* Main.storyboard */,
+				3FFC8DB9204ABAAD00381F42 /* SettingsViewController.swift */,
 				2937D4D21F9B1AD60085DB15 /* Assets.xcassets */,
 				2937D4D41F9B1AD60085DB15 /* LaunchScreen.storyboard */,
 				2937D4D71F9B1AD60085DB15 /* Info.plist */,
@@ -287,6 +290,7 @@
 				290EAB351FA4145A0093500E /* Setting+CoreDataClass.swift in Sources */,
 				290EAB381FA4145A0093500E /* Lesson+CoreDataProperties.swift in Sources */,
 				29A4B60F1FC6C07A000E5696 /* CollectionViewCell.swift in Sources */,
+				3FFC8DBA204ABAAD00381F42 /* SettingsViewController.swift in Sources */,
 				2937D4D11F9B1AD60085DB15 /* guess.xcdatamodeld in Sources */,
 				290EAB371FA4145A0093500E /* Lesson+CoreDataClass.swift in Sources */,
 				2937D4CB1F9B1AD60085DB15 /* ViewController.swift in Sources */,
