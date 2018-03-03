@@ -11,6 +11,16 @@ import CoreData
 
 
 class SettingsViewController: UIViewController {
+
+    //確認用
+    @IBAction func check(_ sender: Any) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<Setting> = Setting.fetchRequest()
+        let setting = Setting(context:context)
+        //データを追加
+        print(setting.no_absence)
+
+    }
     
     @IBOutlet weak var noabsence_field: UITextField!
     
