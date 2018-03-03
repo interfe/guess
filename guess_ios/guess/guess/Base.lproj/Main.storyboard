@@ -64,7 +64,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="class_input:" destination="8lm-q1-A0Y" eventType="touchUpInside" id="PTJ-EK-kSZ"/>
-                                    <action selector="input:" destination="dUE-Qn-xlg" eventType="touchUpInside" id="Rni-TP-F5Z"/>
                                     <action selector="input_noabsence:" destination="dUE-Qn-xlg" eventType="touchUpInside" id="Pxv-jM-6Gl"/>
                                 </connections>
                             </button>

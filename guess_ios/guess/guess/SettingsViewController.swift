@@ -39,6 +39,7 @@ class SettingsViewController: UIViewController {
             //データを追加
             let noabsence_count_num = Int64(noabsence_count)!
             setting.no_absence = Int64(noabsence_count_num)
+            print(noabsence_count_num)
             try context.save()
             dismiss(animated: true, completion: nil)
         }catch{
