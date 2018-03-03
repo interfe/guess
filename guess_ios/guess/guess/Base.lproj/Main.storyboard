@@ -300,6 +300,9 @@
                                     <constraint firstAttribute="height" constant="21" id="BOf-Fj-nkR"/>
                                 </constraints>
                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="attend_input:" destination="8lm-q1-A0Y" eventType="valueChanged" id="zuY-sE-O5H"/>
+                                </connections>
                             </stepper>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ovr-5c-59v">
                                 <rect key="frame" x="273" y="201" width="94" height="29"/>
@@ -307,6 +310,9 @@
                                     <constraint firstAttribute="height" constant="21" id="rOW-7C-kbJ"/>
                                 </constraints>
                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="absebce_input:" destination="8lm-q1-A0Y" eventType="valueChanged" id="rSF-cv-hXB"/>
+                                </connections>
                             </stepper>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="uAU-Hv-viH">
                                 <rect key="frame" x="273" y="238" width="94" height="29"/>
@@ -314,6 +320,9 @@
                                     <constraint firstAttribute="height" constant="21" id="R6f-Pd-Apg"/>
                                 </constraints>
                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="cancel_input:" destination="8lm-q1-A0Y" eventType="valueChanged" id="YA1-HC-UyC"/>
+                                </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="遅刻：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OB-AT-tX8">
                                 <rect key="frame" x="8" y="275" width="52" height="21"/>
@@ -350,6 +359,9 @@
                                     <constraint firstAttribute="height" constant="21" id="scs-1t-Xd6"/>
                                 </constraints>
                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="late_input:" destination="8lm-q1-A0Y" eventType="valueChanged" id="Mmr-yo-zRb"/>
+                                </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3C-sU-gJu">
                                 <rect key="frame" x="8" y="361" width="359" height="26"/>
@@ -429,6 +441,7 @@
                         <outlet property="attend_input" destination="UBv-X1-wKP" id="mC6-b1-IlK"/>
                         <outlet property="attend_no" destination="YhQ-mF-hVI" id="7li-Ut-JCE"/>
                         <outlet property="buttan_input" destination="lhW-U0-sro" id="Eti-fH-wjF"/>
+                        <outlet property="cancel_input" destination="uAU-Hv-viH" id="6eC-v8-r5o"/>
                         <outlet property="cancel_no" destination="0JJ-As-Xqg" id="wb1-1G-B3G"/>
                         <outlet property="class_input" destination="qid-NL-FVU" id="Yql-4w-52y"/>
                         <outlet property="class_label" destination="fGx-CV-oVW" id="Yqe-Pe-4bY"/>

@@ -82,7 +82,7 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         //データを取得する
         let fetchData = try! context.fetch(fetchRequest)
         
-        print("表示！！！")
+      //  print("表示！！！")
         let label_title = testCell.contentView.viewWithTag(2) as! UILabel
         let label_row = testCell.contentView.viewWithTag(3) as! UILabel
         let label_section = testCell.contentView.viewWithTag(4) as! UILabel
