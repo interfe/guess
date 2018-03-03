@@ -51,6 +51,7 @@ class SettingsViewController: UIViewController {
             setting.no_absence = Int64(noabsence_count_num)
             print(noabsence_count_num)
             try context.save()
+            print(setting.no_absence)
             dismiss(animated: true, completion: nil)
         }catch{
             print(error)
