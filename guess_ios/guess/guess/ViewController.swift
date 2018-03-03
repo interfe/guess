@@ -12,8 +12,6 @@ class ViewController: UIViewController ,UICollectionViewDataSource,
 UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var class_sheet: UICollectionView!
-    //授業名（仮）
-    //let class_name = ["やまだ", "No.2","No.3","No.4","No.5"];
     //曜日の数
     let row: CGFloat = 5;
     //何限まであるかの数
