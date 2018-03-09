@@ -103,6 +103,15 @@ class SubViewController: UIViewController {
         else{
             //新しくデータの追加
             do{
+                print("新しくついか!!")
+                //データベース全体を取得
+                let lesson = Lesson(context:context)
+                //データを追加
+                lesson.attend = Int64(attend_text);
+                lesson.absence = Int64(absence_text);
+                lesson.cancel=Int64(cancel_text);
+                lesson.late=Int64(late_text);
+                
                 try context.save()
                 dismiss(animated: true, completion: nil)
             }catch{
@@ -124,7 +133,7 @@ class SubViewController: UIViewController {
 ///授業の情報を入力する
 @IBAction func class_input(_ sender: UIButton) {
     
-    input_attend()
+    
     
 //入力された情報のインプット
         let lesson_name = class_input.text
@@ -191,6 +200,7 @@ class SubViewController: UIViewController {
             dismiss(animated: true, completion: nil)
         }
         }
+    input_attend()
     
 }
     
@@ -264,6 +274,8 @@ class SubViewController: UIViewController {
         // Do any additional setup after loading the view.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchRequest_setting:NSFetchRequest<Setting> = Setting.fetchRequest()
+        let fetchData_setting = try! context.fetch(fetchRequest_setting)
         //rowとcolumでデータを検索する設定をする
         let predicate = NSPredicate(format:"(row == %d && colum == %d)", row, section )
         //データの取得のリクエストを作る
@@ -288,6 +300,11 @@ class SubViewController: UIViewController {
                 absence_input.value = Double(fetchData[i].absence);
                 cancel_input.value = Double(fetchData[i].cancel);
                 late_input.value = Double(fetchData[i].late);
+                
+                absence_input.maximumValue = Double(fetchData_setting[0].no_absence);
+                attend_input.maximumValue = 15-(Double(fetchData[i].absence)+Double(fetchData[i].cancel));
+                cancel_input.maximumValue = 15-(Double(fetchData[i].absence)+Double(fetchData[i].attend));
+
                 
                 //外部変数にいれる
                 attend_text = Int(fetchData[i].attend);

@@ -92,8 +92,8 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
         
       //  print("表示！！！")
         let label_title = testCell.contentView.viewWithTag(2) as! UILabel
-        let label_row = testCell.contentView.viewWithTag(3) as! UILabel
-        let label_section = testCell.contentView.viewWithTag(4) as! UILabel
+        let label_attend = testCell.contentView.viewWithTag(3) as! UILabel
+        let label_absence = testCell.contentView.viewWithTag(4) as! UILabel
         var absense_rate = 0.8
 
         if(!fetchData_lesson.isEmpty){
@@ -102,13 +102,13 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
 
             for i in 0..<fetchData_lesson.count{
                 label_title.text = fetchData_lesson[i].title
-                label_row.text = String(fetchData_lesson[i].row)
-                label_section.text = String(fetchData_lesson[i].colum)
+                label_attend.text = String(fetchData_lesson[i].attend)
+                label_absence.text = String(fetchData_lesson[i].absence)
                 //以下テスト用
                 //absense_rate = 0.2 * Double(fetchData_lesson[i].row)
                 //欠席数/欠席可能数　によって色を出し分け
                 absense_rate = 1.00;
-                absense_rate = ((Double(fetchData_lesson[i].absence))/(Double(fetchData_setting[0].no_absence))*100)
+                absense_rate = ((Double(fetchData_lesson[i].absence + (fetchData_lesson[i].late)/2))/(Double(fetchData_setting[0].no_absence))*100)
                 print("///")
                 print(i)
                 print(fetchData_lesson[i].absence)
@@ -140,8 +140,8 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
             }
         } else {
             label_title.text = nil
-            label_row.text = nil
-            label_section.text = nil
+            label_attend.text = nil
+            label_absence.text = nil
             // セルの背景色
             testCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25)
         }
