@@ -36,7 +36,9 @@ class SettingsViewController: UIViewController {
         }
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest:NSFetchRequest<Setting> = Setting.fetchRequest()
+        let fetchRequest_lesson:NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        let fetchRequest_setting:NSFetchRequest<Setting> = Setting.fetchRequest()
+         let fetchData_setting = try! context.fetch(fetchRequest_setting)
         
         //過去にデータが作成されていた場合
         print("欠席可能数更新！！！")
@@ -48,7 +50,8 @@ class SettingsViewController: UIViewController {
             let setting = Setting(context:context)
             //データを追加
             let noabsence_count_num = Int64(noabsence_count)!
-            setting.no_absence = Int64(noabsence_count_num)
+            fetchData_setting[0].no_absence = Int64(noabsence_count_num)
+            print("de-tabe-sutuika")
             print(noabsence_count_num)
             try context.save()
             print(setting.no_absence)

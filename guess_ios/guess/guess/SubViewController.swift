@@ -288,6 +288,12 @@ class SubViewController: UIViewController {
                 absence_input.value = Double(fetchData[i].absence);
                 cancel_input.value = Double(fetchData[i].cancel);
                 late_input.value = Double(fetchData[i].late);
+                
+                //外部変数にいれる
+                attend_text = Int(fetchData[i].attend);
+                absence_text = Int(fetchData[i].absence);
+                cancel_text = Int(fetchData[i].cancel);
+                late_text = Int(fetchData[i].late);
 
             }
             } else {

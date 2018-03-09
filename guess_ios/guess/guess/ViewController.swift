@@ -107,20 +107,28 @@ UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
                 //以下テスト用
                 //absense_rate = 0.2 * Double(fetchData_lesson[i].row)
                 //欠席数/欠席可能数　によって色を出し分け
-               // absense_rate = 1 - Double(fetchData_lesson[i].absence/fetchData_setting[i].no_absence)
+                absense_rate = 1.00;
+                absense_rate = ((Double(fetchData_lesson[i].absence))/(Double(fetchData_setting[0].no_absence))*100)
+                print("///")
+                print(i)
+                print(fetchData_lesson[i].absence)
+                print(fetchData_setting[i].no_absence)
+                print("わりざん")
+                print((fetchData_lesson[i].absence*10)/(fetchData_setting[0].no_absence*10))
+                print(absense_rate);
                 switch absense_rate {
                 // 青信号
-                case 0.7...1.0:
+                case 0...30:
                       testCell.backgroundColor = UIColor(red: 0.416, green: 0.890, blue: 0.545, alpha: 0.85)
                     
-                case 0.3..<0.7:
+                case 30..<70:
                 // 黄色信号
                     testCell.backgroundColor = UIColor(red: 0.965, green: 0.792, blue: 0.373, alpha: 0.85)
 
-                case 0.0..<0.3:
+                case 70..<100:
                 //　赤信号
                      testCell.backgroundColor = UIColor(red: 0.890, green: 0.286, blue: 0.239, alpha: 0.85)
-                case ..<0:
+                case 100:
                 //  DEAD 黒
                      testCell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.85)
                     
