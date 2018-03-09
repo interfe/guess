@@ -25,8 +25,7 @@ class SubViewController: UIViewController {
     @IBOutlet weak var late_no: UILabel!
     @IBOutlet weak var late_input: UIStepper!
     @IBOutlet weak var cancel_input: UIStepper!
-    
-    
+    @IBOutlet weak var subview_txt: UILabel!
     
     
     var section = 0;
@@ -277,14 +276,24 @@ class SubViewController: UIViewController {
                 //各項目のデータを書き換える
 //                class_input.placeholder = fetchData[i].title;
                 class_name.title = fetchData[i].title;
-                class_input.attributedPlaceholder = NSAttributedString(string: fetchData[i].title!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.black]);
-                print(fetchData[i].attend)
+                class_input.text = fetchData[i].title;
                 attend_no.text = String(fetchData[i].attend);
                 absence_no.text = String(fetchData[i].absence);
                 cancel_no.text = String(fetchData[i].cancel);
                 late_no.text = String(fetchData[i].late);
+                subview_txt.alpha = 0;
+
+                //steperの値の初期値を変更
+                attend_input.value = Double(fetchData[i].attend);
+                absence_input.value = Double(fetchData[i].absence);
+                cancel_input.value = Double(fetchData[i].cancel);
+                late_input.value = Double(fetchData[i].late);
+
             }
             } else {
+            print("しょき1")
+            print(attend_text);
+            attend_input.value = Double(attend_text);
                 class_name.title = "新規作成"
             }
         
